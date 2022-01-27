@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  .sub2 {
-    border: 1px solid red;
-  }
+  width: 200px;
+  border: 1px solid #ccc;
 `;

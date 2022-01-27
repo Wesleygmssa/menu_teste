@@ -1,113 +1,113 @@
 import React, { useMemo, useState } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Tabs } from "antd";
+import { LaptopOutlined } from "@ant-design/icons";
+import { Container } from "./styles";
+import Menu from "../src/config/menu.json";
+import Favoritos from "../src/config/favoritos.json";
 
-const { SubMenu } = Menu;
+const { TabPane } = Tabs;
+
+const { SubMenu } = MenuComponente;
 const { Sider } = Layout;
-
-const menu: any = [
-  {
-    title: "Home",
-    key: "1",
-    icon: <UserOutlined />,
-    list: [
-      {
-        key: "1",
-        title: "Home",
-        url: "/",
-      },
-      {
-        key: "2",
-        title: "Produtos",
-        url: "/produtos",
-      },
-      {
-        key: "3",
-        title: "Carrinho",
-        url: "/carrinho",
-      },
-      {
-        key: "4",
-        title: "Contato",
-        url: "/contato",
-      },
-    ],
-  },
-  {
-    title: "Home",
-    key: "1",
-    icon: <UserOutlined />,
-    list: [
-      {
-        key: "5",
-        title: "Login",
-        url: "/login",
-      },
-      {
-        key: "6",
-        title: "Cadastro",
-        url: "/cadastro",
-      },
-    ],
-  },
-];
 
 function App() {
   const [search, setSearch] = useState<any>("");
 
   const menufiltrado = useMemo(() => {
     const lowerBusca = search.toLowerCase();
-    return menu[0].list.filter((item: any) => {
+    return Menu[0].list.filter((item: any) => {
       return item.title.toLowerCase().includes(lowerBusca);
     });
   }, [search]);
 
   const menufiltrado2 = useMemo(() => {
     const lowerBusca = search.toLowerCase();
-    return menu[1].list.filter((item: any) => {
+    return Menu[1].list.filter((item: any) => {
       return item.title.toLowerCase().includes(lowerBusca);
     });
   }, [search]);
 
   return (
-    <>
-      <Layout>
-        <Sider width={200} className="site-layout-background">
-          <Input.Search
-            type={search}
-            placeholder="Pesquisar"
-            value={search}
-            onChange={(event: any) => setSearch(event.target.value)}
-          />
+    <Container>
+      <div className="card-container">
+        <Input.Search
+          type={search}
+          placeholder="Pesquisar"
+          value={search}
+          onChange={(event: any) => setSearch(event.target.value)}
+        />
+        <Tabs type="card">
+          <TabPane tab="Pasta" key="1">
+            <Sider width={200} className="site-layout-background">
+              <MenuComponente
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                style={{ height: "100%", borderRight: 0 }}
+              >
+                {menufiltrado && menufiltrado.length > 0 && (
+                  <>
+                    <SubMenu
+                      key="sub1"
+                      icon={<LaptopOutlined />}
+                      title="Caixa de entrada"
+                    >
+                      {menufiltrado.map((item: any) => {
+                        return (
+                          <MenuComponente.Item key={item.key}>
+                            {item.title}
+                          </MenuComponente.Item>
+                        );
+                      })}
+                    </SubMenu>
+                  </>
+                )}
 
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", borderRight: 0 }}
-          >
-            {menufiltrado && menufiltrado.length > 0 && (
-              <>
-                <SubMenu key="sub1" title="subnav 1">
-                  {menufiltrado.map((item: any) => {
-                    return <Menu.Item key={item.key}>{item.title}</Menu.Item>;
-                  })}
-                </SubMenu>
-              </>
-            )}
-
-            {menufiltrado2 && menufiltrado2.length > 0 && (
-              <SubMenu key="sub2" title="subnav 2">
-                {menufiltrado2.map((item: any) => {
-                  return <Menu.Item key={item.key}>{item.title}</Menu.Item>;
-                })}
-              </SubMenu>
-            )}
-          </Menu>
-        </Sider>
-      </Layout>
-    </>
+                {menufiltrado2 && menufiltrado2.length > 0 && (
+                  <SubMenu
+                    key="sub2"
+                    icon={<LaptopOutlined />}
+                    title="Rascunhos"
+                  >
+                    {menufiltrado2.map((item: any) => {
+                      return (
+                        <MenuComponente.Item key={item.key}>
+                          {item.title}
+                        </MenuComponente.Item>
+                      );
+                    })}
+                  </SubMenu>
+                )}
+              </MenuComponente>
+            </Sider>
+          </TabPane>
+          <TabPane tab="Favoritos" key="2">
+            <Sider width={200} className="site-layout-background">
+              <MenuComponente
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                style={{ height: "100%", borderRight: 0 }}
+              >
+                {Favoritos && Favoritos.length > 0 && (
+                  <>
+                    {Favoritos.map((item: any) => {
+                      return (
+                        <MenuComponente.Item key={item.key}>
+                          {item.title}
+                        </MenuComponente.Item>
+                      );
+                    })}
+                  </>
+                )}
+              </MenuComponente>
+            </Sider>
+          </TabPane>
+        </Tabs>
+      </div>
+    </Container>
   );
 }
 
