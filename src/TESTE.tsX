@@ -73,3 +73,45 @@ function App() {
 }
 
 export default App;
+
+console.log("teste", menu[0]);
+
+const List1 = [
+  {
+    key: "1",
+    title: "Home",
+    url: "/",
+  },
+  {
+    key: "2",
+    title: "Produtos",
+    url: "/produtos",
+  },
+  {
+    key: "3",
+    title: "Carrinho",
+    url: "/carrinho",
+  },
+  {
+    key: "4",
+    title: "Contato",
+    url: "/contato",
+  },
+];
+
+const list2 = [
+  {
+    key: "5",
+    title: "Login",
+    url: "/login",
+  },
+];
+
+// const menufilter = (list: any) => {
+//   const lowerBusca = search.toLowerCase();
+//   const menufilter = list.filter((item: any) => {
+//     return item.title.toLowerCase().includes(lowerBusca);
+//   });
+
+//   return menufilter;
+// };
