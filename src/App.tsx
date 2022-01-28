@@ -3,9 +3,10 @@ import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
 import { Tabs } from "antd";
 import { LaptopOutlined } from "@ant-design/icons";
-import { Container } from "./styles";
+import { Container, ContainerInte } from "./styles";
 import Menu from "../src/config/menu.json";
 import Favoritos from "../src/config/favoritos.json";
+import { Checkbox } from "antd";
 
 const { TabPane } = Tabs;
 
@@ -25,6 +26,14 @@ function App() {
   const menufiltrado2 = useMemo(() => {
     const lowerBusca = search.toLowerCase();
     return Menu[1].list.filter((item: any) => {
+      return item.title.toLowerCase().includes(lowerBusca);
+    });
+  }, [search]);
+
+  //filtra os favoritos
+  const FavoritosFiltrado = useMemo(() => {
+    const lowerBusca = search.toLowerCase();
+    return Favoritos[0].list.filter((item: any) => {
       return item.title.toLowerCase().includes(lowerBusca);
     });
   }, [search]);
@@ -56,9 +65,14 @@ function App() {
                     >
                       {menufiltrado.map((item: any) => {
                         return (
-                          <MenuComponente.Item key={item.key}>
-                            {item.title}
-                          </MenuComponente.Item>
+                          <>
+                            <MenuComponente.Item key={item.key}>
+                              <ContainerInte>
+                                <div className="teste">{item.title}</div>
+                                <Checkbox className="teste2" />
+                              </ContainerInte>
+                            </MenuComponente.Item>
+                          </>
                         );
                       })}
                     </SubMenu>
@@ -73,9 +87,14 @@ function App() {
                   >
                     {menufiltrado2.map((item: any) => {
                       return (
-                        <MenuComponente.Item key={item.key}>
-                          {item.title}
-                        </MenuComponente.Item>
+                        <>
+                          <MenuComponente.Item key={item.key}>
+                            <ContainerInte>
+                              <div className="teste">{item.title}</div>
+                              <Checkbox className="teste2" />
+                            </ContainerInte>
+                          </MenuComponente.Item>
+                        </>
                       );
                     })}
                   </SubMenu>
@@ -91,9 +110,9 @@ function App() {
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                {Favoritos && Favoritos.length > 0 && (
+                {FavoritosFiltrado && FavoritosFiltrado.length > 0 && (
                   <>
-                    {Favoritos.map((item: any) => {
+                    {FavoritosFiltrado.map((item: any) => {
                       return (
                         <MenuComponente.Item key={item.key}>
                           {item.title}

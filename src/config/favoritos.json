@@ -1,7 +1,18 @@
 [
   {
-    "key": "1",
     "title": "Home",
-    "url": "/"
+    "key": "1",
+    "list": [
+      {
+        "key": "1",
+        "title": "Home",
+        "url": "/"
+      },
+      {
+        "key": "2",
+        "title": "Contato",
+        "url": "/"
+      }
+    ]
   }
 ]

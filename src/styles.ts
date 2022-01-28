@@ -1,6 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 200px;
-  border: 1px solid #ccc;
+  display: flex;
+  width: 220px;
+`;
+
+export const ContainerInte = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  .teste {
+    flex: 1;
+  }
+  .teste2 {
+    flex: 1;
+  }
 `;
