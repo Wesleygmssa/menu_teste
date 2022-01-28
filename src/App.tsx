@@ -16,14 +16,14 @@ const { Sider } = Layout;
 function App() {
   const [search, setSearch] = useState<any>("");
 
-  const menufiltrado = useMemo(() => {
+  const Listafiltrada = useMemo(() => {
     const lowerBusca = search.toLowerCase();
     return Menu[0].list.filter((item: any) => {
       return item.title.toLowerCase().includes(lowerBusca);
     });
   }, [search]);
 
-  const menufiltrado2 = useMemo(() => {
+  const Listafiltrada2 = useMemo(() => {
     const lowerBusca = search.toLowerCase();
     return Menu[1].list.filter((item: any) => {
       return item.title.toLowerCase().includes(lowerBusca);
@@ -56,14 +56,14 @@ function App() {
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                {menufiltrado && menufiltrado.length > 0 && (
+                {Listafiltrada && Listafiltrada.length > 0 && (
                   <>
                     <SubMenu
                       key="sub1"
                       icon={<LaptopOutlined />}
                       title="Caixa de entrada"
                     >
-                      {menufiltrado.map((item: any) => {
+                      {Listafiltrada.map((item: any) => {
                         return (
                           <>
                             <MenuComponente.Item key={item.key}>
@@ -79,13 +79,13 @@ function App() {
                   </>
                 )}
 
-                {menufiltrado2 && menufiltrado2.length > 0 && (
+                {Listafiltrada2 && Listafiltrada2.length > 0 && (
                   <SubMenu
                     key="sub2"
                     icon={<LaptopOutlined />}
                     title="Rascunhos"
                   >
-                    {menufiltrado2.map((item: any) => {
+                    {Listafiltrada2.map((item: any) => {
                       return (
                         <>
                           <MenuComponente.Item key={item.key}>
