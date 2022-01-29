@@ -90,8 +90,8 @@ function App() {
                         <>
                           <MenuComponente.Item key={item.key}>
                             <ContainerInte>
-                              <div className="teste">{item.title}</div>
-                              <Checkbox className="teste2" />
+                              <div className="title">{item.title}</div>
+                              <Checkbox className="image" />
                             </ContainerInte>
                           </MenuComponente.Item>
                         </>

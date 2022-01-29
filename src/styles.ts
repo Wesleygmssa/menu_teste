@@ -11,10 +11,10 @@ export const ContainerInte = styled.div`
   align-items: center;
   gap: 30px;
 
-  .teste {
+  .title {
     flex: 1;
   }
-  .teste2 {
+  .image {
     flex: 1;
   }
 `;
