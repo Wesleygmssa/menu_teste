@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
 import { Tabs } from "antd";
-import { LaptopOutlined } from "@ant-design/icons";
+import { LaptopOutlined, StarOutlined } from "@ant-design/icons";
 import { Container, ContainerInte } from "./styles";
 import Menu from "../src/config/menu.json";
 import Favoritos from "../src/config/favoritos.json";
@@ -61,15 +61,15 @@ function App() {
                     <SubMenu
                       key="sub1"
                       icon={<LaptopOutlined />}
-                      title="Caixa de entrada"
+                      title={Menu[0].title}
                     >
                       {Listafiltrada.map((item: any) => {
                         return (
                           <>
                             <MenuComponente.Item key={item.key}>
                               <ContainerInte>
-                                <div className="teste">{item.title}</div>
-                                <Checkbox className="teste2" />
+                                <div className="title">{item.title}</div>
+                                <Checkbox className="Checkbox" />
                               </ContainerInte>
                             </MenuComponente.Item>
                           </>
@@ -83,7 +83,7 @@ function App() {
                   <SubMenu
                     key="sub2"
                     icon={<LaptopOutlined />}
-                    title="Rascunhos"
+                    title={Menu[1].title}
                   >
                     {Listafiltrada2.map((item: any) => {
                       return (
@@ -91,7 +91,7 @@ function App() {
                           <MenuComponente.Item key={item.key}>
                             <ContainerInte>
                               <div className="title">{item.title}</div>
-                              <Checkbox className="image" />
+                              <Checkbox className="Checkbox" />
                             </ContainerInte>
                           </MenuComponente.Item>
                         </>

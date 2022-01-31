@@ -11,10 +11,10 @@ export const ContainerInte = styled.div`
   align-items: center;
   gap: 30px;
 
-  .title {
+  .Checkbox {
     flex: 1;
   }
-  .image {
+  .title {
     flex: 1;
   }
 `;

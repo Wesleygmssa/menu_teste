@@ -1,6 +1,6 @@
 [
   {
-    "title": "Home",
+    "title": "Caixa de entrada",
     "key": "1",
     "list": [
       {
@@ -26,8 +26,8 @@
     ]
   },
   {
-    "title": "Home",
-    "key": "1",
+    "title": "Rascunhos",
+    "key": "2",
     "list": [
       {
         "key": "5",
