@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState } from "react";
 import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
 import { Tabs } from "antd";
@@ -20,6 +20,7 @@ function App() {
 
   let listaFiltrada =  FilterMenu(Menu[0].list, search);
   let listaFiltrada2 = FilterMenu(Menu[1].list, search);
+  let listaFiltrada3 = FilterMenu(Menu[2].list, search);
   let favoritosFiltrado = FilterMenu(Favoritos[0].list, search);
 
   const handleStart = (item: any, index: any) => {
@@ -46,7 +47,7 @@ function App() {
               >
                 {listaFiltrada && listaFiltrada.length > 0 && (
                     <SubMenu
-                      key="sub1"
+                      key={Menu[0].key}
                       icon={<LaptopOutlined />}
                       title={Menu[0].title}
                     >
@@ -67,7 +68,7 @@ function App() {
 
                 {listaFiltrada2 && listaFiltrada2.length > 0 && (
                   <SubMenu
-                    key="sub2"
+                  key={Menu[1].key}
                     icon={<LaptopOutlined />}
                     title={Menu[1].title}
                   >
@@ -85,6 +86,28 @@ function App() {
                     })}
                   </SubMenu>
                 )}
+
+                {listaFiltrada3 && listaFiltrada3.length > 0 && (
+                  <SubMenu
+                  key={Menu[2].key}
+                    icon={<LaptopOutlined />}
+                    title={Menu[2].title}
+                  >
+                    {listaFiltrada3.map((item: any) => {
+                      return (
+                        <>
+                          <MenuComponente.Item key={item.key}>
+                            <ContainerInte>
+                              <div className="title">{item.title}</div>
+                              <StarOutlined />
+                            </ContainerInte>
+                          </MenuComponente.Item>
+                        </>
+                      );
+                    })}
+                  </SubMenu>
+                )}
+
 
               </MenuComponente>
             </Sider>
