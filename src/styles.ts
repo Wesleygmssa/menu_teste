@@ -17,4 +17,6 @@ export const ContainerInte = styled.div`
   .title {
     flex: 1;
   }
+
+ 
 `;

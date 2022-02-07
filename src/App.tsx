@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
 import { Tabs } from "antd";
@@ -6,7 +6,7 @@ import { LaptopOutlined, StarOutlined } from "@ant-design/icons";
 import { Container, ContainerInte } from "./styles";
 import Menu from "../src/config/menu.json";
 import Favoritos from "../src/config/favoritos.json";
-import { Checkbox } from "antd";
+import {FilterMenu} from './utils/filterMenu';
 
 const { TabPane } = Tabs;
 
@@ -15,28 +15,16 @@ const { Sider } = Layout;
 
 function App() {
   const [search, setSearch] = useState<any>("");
+  const [active , setActive] = useState<any>(false);
 
-  const Listafiltrada = useMemo(() => {
-    const lowerBusca = search.toLowerCase();
-    return Menu[0].list.filter((item: any) => {
-      return item.title.toLowerCase().includes(lowerBusca);
-    });
-  }, [search]);
 
-  const Listafiltrada2 = useMemo(() => {
-    const lowerBusca = search.toLowerCase();
-    return Menu[1].list.filter((item: any) => {
-      return item.title.toLowerCase().includes(lowerBusca);
-    });
-  }, [search]);
+  let listaFiltrada =  FilterMenu(Menu[0].list, search);
+  let listaFiltrada2 = FilterMenu(Menu[1].list, search);
+  let favoritosFiltrado = FilterMenu(Favoritos[0].list, search);
 
-  //filtra os favoritos
-  const FavoritosFiltrado = useMemo(() => {
-    const lowerBusca = search.toLowerCase();
-    return Favoritos[0].list.filter((item: any) => {
-      return item.title.toLowerCase().includes(lowerBusca);
-    });
-  }, [search]);
+  const handleStart = (item: any, index: any) => {
+    setActive(!active);
+  };
 
   return (
     <Container>
@@ -56,42 +44,40 @@ function App() {
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                {Listafiltrada && Listafiltrada.length > 0 && (
-                  <>
+                {listaFiltrada && listaFiltrada.length > 0 && (
                     <SubMenu
                       key="sub1"
                       icon={<LaptopOutlined />}
                       title={Menu[0].title}
                     >
-                      {Listafiltrada.map((item: any) => {
+                      {listaFiltrada.map((item: any, index: any) => {                        
                         return (
                           <>
-                            <MenuComponente.Item key={item.key}>
-                              <ContainerInte>
+                            <MenuComponente.Item key={item.id} onClick={()=>{handleStart(item, index)}}>
+                              <ContainerInte >
                                 <div className="title">{item.title}</div>
-                                <Checkbox className="Checkbox" />
+                                {item.favorite === true ?  <StarOutlined  style={{color:'#fceb00'}} /> : <StarOutlined/>} 
                               </ContainerInte>
                             </MenuComponente.Item>
                           </>
                         );
                       })}
                     </SubMenu>
-                  </>
                 )}
 
-                {Listafiltrada2 && Listafiltrada2.length > 0 && (
+                {listaFiltrada2 && listaFiltrada2.length > 0 && (
                   <SubMenu
                     key="sub2"
                     icon={<LaptopOutlined />}
                     title={Menu[1].title}
                   >
-                    {Listafiltrada2.map((item: any) => {
+                    {listaFiltrada2.map((item: any) => {
                       return (
                         <>
                           <MenuComponente.Item key={item.key}>
                             <ContainerInte>
                               <div className="title">{item.title}</div>
-                              <Checkbox className="Checkbox" />
+                              <StarOutlined />
                             </ContainerInte>
                           </MenuComponente.Item>
                         </>
@@ -99,6 +85,7 @@ function App() {
                     })}
                   </SubMenu>
                 )}
+
               </MenuComponente>
             </Sider>
           </TabPane>
@@ -110,9 +97,9 @@ function App() {
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
-                {FavoritosFiltrado && FavoritosFiltrado.length > 0 && (
+                {favoritosFiltrado && favoritosFiltrado.length > 0 && (
                   <>
-                    {FavoritosFiltrado.map((item: any) => {
+                    {favoritosFiltrado.map((item: any) => {
                       return (
                         <MenuComponente.Item key={item.key}>
                           {item.title}

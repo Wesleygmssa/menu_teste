@@ -1,15 +1,15 @@
 [
   {
     "title": "Home",
-    "key": "1",
+    "id": "1",
     "list": [
       {
-        "key": "1",
+        "id": "1",
         "title": "Home",
         "url": "/"
       },
       {
-        "key": "2",
+        "id": "2",
         "title": "Contato",
         "url": "/"
       }
