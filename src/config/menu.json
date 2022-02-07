@@ -1,7 +1,7 @@
 [
   {
-    "title": "Caixa de entrada",
     "id": "1",
+    "title": "Caixa de entrada",
     "list": [
       {
         "id": "1",
@@ -30,8 +30,8 @@
     ]
   },
   {
-    "title": "Rascunhos",
     "id": "2",
+    "title": "Rascunhos",
     "list": [
       {
         "id": "5",
