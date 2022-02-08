@@ -1,11 +1,11 @@
-import {MenuCoponent} from './components/menu';
-import Menu from "./config/menu.json";
-import Favoritos from "../src/config/favoritos.json";
+import {MenuComponent} from './components/menu';
+import data from "./config/menu.json";
+import favoritos from "../src/config/favoritos.json";
 
 function App() {
 
   return (
-  <MenuCoponent data={Menu} favorite={Favoritos}/>
+  <MenuComponent data={data} favorite={favoritos}/>
   );
 }
 

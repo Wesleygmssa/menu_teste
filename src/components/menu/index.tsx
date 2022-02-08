@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 const { SubMenu } = MenuComponente;
 const { Sider } = Layout;
 
-export function MenuCoponent({data, favorite}: any) {
+export function MenuComponent({data, favorite}: any) {
   const [search, setSearch] = useState<any>("");
   const [active , setActive] = useState<any>(false);
 
