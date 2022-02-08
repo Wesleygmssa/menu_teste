@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 const { SubMenu } = MenuComponente;
 const { Sider } = Layout;
 
-export function MenuComponent({data, favorite}: any) {
+export function MenuComponent({data, favorite, roles}: any) {
   const [search, setSearch] = useState<any>("");
   const [active , setActive] = useState<any>(false);
 
@@ -39,7 +39,7 @@ export function MenuComponent({data, favorite}: any) {
             <Sider width={200} className="site-layout-background">
               <MenuComponente
                 mode="inline"
-                defaultSelectedKeys={["1"]}
+                // defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
@@ -114,7 +114,7 @@ export function MenuComponent({data, favorite}: any) {
             <Sider width={200} className="site-layout-background">
               <MenuComponente
                 mode="inline"
-                defaultSelectedKeys={["1"]}
+                // defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 style={{ height: "100%", borderRight: 0 }}
               >
