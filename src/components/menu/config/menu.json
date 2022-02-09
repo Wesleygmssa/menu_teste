@@ -45,7 +45,8 @@
       {
         "id": "6",
         "title": "Cadastro",
-        "url": "/cadastro"
+        "url": "/cadastro",
+        "favorite": true
       }
     ]
   },
@@ -68,7 +69,8 @@
       {
         "id": "9",
         "title": "Categoria 3",
-        "url": "/categoria3"
+        "url": "/categoria3",
+        "favorite": true
       }
     ]
   }
