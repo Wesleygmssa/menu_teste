@@ -9,7 +9,7 @@
         "id": "1",
         "title": "Home",
         "url": "/",
-        "favorite": true
+        "favorite": false
       },
       {
         "id": "2",
@@ -27,7 +27,7 @@
         "id": "4",
         "title": "Contato",
         "url": "/contato",
-        "favorite": true
+        "favorite": false
       }
     ]
   },
@@ -40,13 +40,14 @@
       {
         "id": "5",
         "title": "Login",
-        "url": "/login"
+        "url": "/login",
+        "favorite": false
       },
       {
         "id": "6",
         "title": "Cadastro",
         "url": "/cadastro",
-        "favorite": true
+        "favorite": false
       }
     ]
   },
@@ -59,18 +60,20 @@
       {
         "id": "7",
         "title": "Categoria 1",
-        "url": "/categoria1"
+        "url": "/categoria1",
+        "favorite": false
       },
       {
         "id": "8",
         "title": "Categoria 2",
-        "url": "/categoria2"
+        "url": "/categoria2",
+        "favorite": false
       },
       {
         "id": "9",
         "title": "Categoria 3",
         "url": "/categoria3",
-        "favorite": true
+        "favorite": false
       }
     ]
   }

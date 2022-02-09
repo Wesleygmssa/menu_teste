@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout, Menu as MenuComponente } from "antd";
 import { Input } from "antd";
 import { Tabs } from "antd";
 // import { LaptopOutlined, StarOutlined } from "@ant-design/icons";
-import { Container, ContainerInte } from "./styles";
-import { StarOutlined, StarFilled, StarTwoTone , LaptopOutlined} from '@ant-design/icons';
-
-
+import { Container, ContainerInte , Icon, Title} from "./styles";
+import { StarOutlined, StarFilled,  LaptopOutlined} from '@ant-design/icons';
 
 import {FilterMenu} from './utils/filterMenu';
 
@@ -16,27 +14,30 @@ const { Sider } = Layout;
 
 export function MenuComponent({data, favorite, roles}: any) {
   const [search, setSearch] = useState<any>("");
-  const [active , setActive] = useState<any>(false);
+  const [active , setActive] = useState<any>(Boolean);
+  const [positionStorage, setPositionStorage] = useState<any>();
 
+  const NewList1 = JSON.parse(localStorage.getItem(`@menu0`) as any) // obtiene la lista de favoritos
+  const NewList2 = JSON.parse(localStorage.getItem(`@menu1`) as any) // obtiene la lista de favoritos
+  const NewList3 = JSON.parse(localStorage.getItem(`@menu2`) as any) // obtiene la lista de favoritos
+  
+  let listaFiltrada1 =  FilterMenu(NewList1, search); // filtra la lista de favoritos
+  let listaFiltrada2 = FilterMenu(data[1].list, search); // filtra la lista de favoritos
+  let listaFiltrada3 = FilterMenu(data[2].list, search); // filtra la lista de favoritos
+  let favoritosFiltrado = FilterMenu(favorite[0].list, search); // filtra la lista de favoritos
 
-  let listaFiltrada1 =  FilterMenu(data[0].list, search);
-  let listaFiltrada2 = FilterMenu(data[1].list, search);
-  let listaFiltrada3 = FilterMenu(data[2].list, search);
-  let favoritosFiltrado = FilterMenu(favorite[0].list, search);
-
-  const handleStart = (item: any, index: any) => {
+  const handleStart = () => {
     setActive(!active);
   };
 
-  const handleAddFavorite = (id: any, index: any, data: any): void => {
-
-    console.log('teste', id,  data[0].list[index].id);
-  
- 
+  const handleAddFavorite = (id: any, index: any, data: any, position: any): void => {
+    let lista = data[position].list; // lista de favoritos
+      lista[index].favorite = !active; // cambia el estado del favorito
+      data[position].list = lista; // actualiza la lista de favoritos
+      localStorage.setItem(`@menu${position}`, JSON.stringify([...lista])); // actualiza el localStorage
+      setPositionStorage(position); // actualiza la posicion del localStorage
   };
-
-
-
+  
   return (
     <Container>
       <div className="card-container">
@@ -61,18 +62,19 @@ export function MenuComponent({data, favorite, roles}: any) {
                       icon={<LaptopOutlined />}
                       title={data[0].title}
                     >
-                      {listaFiltrada1.map((item: any, index: any) => {                        
+                      {listaFiltrada1.map((item: any, index: any) => {    
                         return (
-                          <>
-                            <MenuComponente.Item key={item.id} onClick={()=>{handleStart(item, index)}}>
+                            <MenuComponente.Item key={item.id} >
                               <ContainerInte >
-                                <div className="title">{item.title}</div>
-                                <div onClick={()=>{handleAddFavorite(item.id, index, data)}}>
+                                <Title >{item.title}</Title>
+                                <Icon onClick={()=>{
+                                  handleStart()
+                                  handleAddFavorite(item.id, index, data, 0)
+                                  }}>
                                     {item.favorite  ?  <StarFilled   style={{ color:"#fceb00",  fontSize: '16px'}} /> : <StarOutlined style={{ fontSize: '14px'}} />} 
-                              </div>
+                              </Icon>
                               </ContainerInte>
                             </MenuComponente.Item>
-                          </>
                         );
                       })}
                     </SubMenu>
@@ -85,13 +87,18 @@ export function MenuComponent({data, favorite, roles}: any) {
                     title={data[1].title}
 
                   >
-                    {listaFiltrada2.map((item: any) => {
+                    {listaFiltrada2.map((item: any, index: any) => {
                       return (
                         <>
-                          <MenuComponente.Item key={item.key}>
+                          <MenuComponente.Item key={item.key} >
                             <ContainerInte>
-                              <div className="title">{item.title}</div>
-                              {item.favorite  ?  <StarFilled   style={{ color:"#fceb00",  fontSize: '16px'}} /> : <StarOutlined style={{ fontSize: '14px'}} />} 
+                              <Title >{item.title}</Title>
+                              <Icon onClick={()=>{
+                                handleAddFavorite(item.id, index, data, 1)
+                                handleStart()
+                                }}>
+                                    {item.favorite  ?  <StarFilled   style={{ color:"#fceb00",  fontSize: '16px'}} /> : <StarOutlined style={{ fontSize: '14px'}} />} 
+                              </Icon>
                             </ContainerInte>
                           </MenuComponente.Item>
                         </>
@@ -106,13 +113,18 @@ export function MenuComponent({data, favorite, roles}: any) {
                     icon={<LaptopOutlined />}
                     title={data[2].title}
                   >
-                    {listaFiltrada3.map((item: any) => {
+                    {listaFiltrada3.map((item: any, index: any) => {
                       return (
                         <>
-                          <MenuComponente.Item key={item.key}>
+                          <MenuComponente.Item key={item.key} >
                             <ContainerInte>
-                              <div className="title">{item.title}</div>
-                              {item.favorite  ?  <StarFilled   style={{ color:"#fceb00",  fontSize: '16px'}} /> : <StarOutlined style={{ fontSize: '14px'}} />} 
+                              <Title >{item.title}</Title>
+                              <Icon onClick={()=>{
+                                handleAddFavorite(item.id, index, data, 2)
+                                handleStart()
+                                }}>
+                                    {item.favorite  ?  <StarFilled   style={{ color:"#fceb00",  fontSize: '16px'}} /> : <StarOutlined style={{ fontSize: '14px'}} />} 
+                              </Icon>
                             </ContainerInte>
                           </MenuComponente.Item>
                         </>
