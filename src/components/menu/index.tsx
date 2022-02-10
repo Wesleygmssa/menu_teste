@@ -17,11 +17,12 @@ export function MenuComponent({data, favorite, roles}: any) {
   const [active , setActive] = useState<any>(Boolean);
   const [positionStorage, setPositionStorage] = useState<any>();
 
-  const NewList1 = JSON.parse(localStorage.getItem(`@menu0`) as any) // obtiene la lista de favoritos
-  const NewList2 = JSON.parse(localStorage.getItem(`@menu1`) as any) // obtiene la lista de favoritos
-  const NewList3 = JSON.parse(localStorage.getItem(`@menu2`) as any) // obtiene la lista de favoritos
+  //Pegando a posição do menu
+  // const NewList1 = JSON.parse(localStorage.getItem(`@menu0`) as any) // obtiene la lista de favoritos
+  // const NewList2 = JSON.parse(localStorage.getItem(`@menu1`) as any) // obtiene la lista de favoritos
+  // const NewList3 = JSON.parse(localStorage.getItem(`@menu2`) as any) // obtiene la lista de favoritos
   
-  let listaFiltrada1 =  FilterMenu(NewList1, search); // filtra la lista de favoritos
+  let listaFiltrada1 =  FilterMenu(data[0].list, search); // filtra la lista de favoritos
   let listaFiltrada2 = FilterMenu(data[1].list, search); // filtra la lista de favoritos
   let listaFiltrada3 = FilterMenu(data[2].list, search); // filtra la lista de favoritos
   let favoritosFiltrado = FilterMenu(favorite[0].list, search); // filtra la lista de favoritos
@@ -34,8 +35,12 @@ export function MenuComponent({data, favorite, roles}: any) {
     let lista = data[position].list; // lista de favoritos
       lista[index].favorite = !active; // cambia el estado del favorito
       data[position].list = lista; // actualiza la lista de favoritos
-      localStorage.setItem(`@menu${position}`, JSON.stringify([...lista])); // actualiza el localStorage
-      setPositionStorage(position); // actualiza la posicion del localStorage
+
+
+      //LocalStorage
+  
+      // localStorage.setItem(`@menu${position}`, JSON.stringify([...lista])); // actualiza el localStorage
+      // setPositionStorage(position); // actualiza la posicion del localStorage
   };
   
   return (
